@@ -1,0 +1,8 @@
+version: '2'
+services:
+  redis-cluster:
+    image: digitalwonderland/zookeeper
+    ports:
+      - '2181:2181'
+      - '2888:2888'
+      - '3888:3888'

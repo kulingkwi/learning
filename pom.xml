@@ -23,5 +23,14 @@
         <module>es</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>3.4.10</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

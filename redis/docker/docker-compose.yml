@@ -1,0 +1,6 @@
+version: '2'
+services:
+  zk:
+    image: grokzen/redis-cluster
+    ports:
+      - '7000-7007:7000-7007'

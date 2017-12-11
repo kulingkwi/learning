@@ -13,6 +13,23 @@ public class Master implements Watcher {
     String serverId = Long.toHexString(new Random().nextLong());
     boolean isLeader = false;
 
+    AsyncCallback.StringCallback mastercreateCallback = new AsyncCallback.StringCallback() {
+        public void processResult(int rc, String path, Object ctx, String name) {
+            switch (KeeperException.Code.get(rc)) {
+                case CONNECTIONLOSS:
+                    checkMaster();
+                    return;
+                case OK:
+                    isLeader = true;
+                    break;
+                default:
+                    isLeader = false;
+
+            }
+            System.out.println("I am " + (isLeader ? "" : " not ") + " the leader");
+        }
+    };
+
     Master(String hostPort) {
         this.hostPort = hostPort;
     }
@@ -44,7 +61,7 @@ public class Master implements Watcher {
 
     /** run for master election */
     void runForMaster() throws InterruptedException {
-        while(true) {
+       while(true) {
             try{
                 zk.create("/master", serverId.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
                 isLeader = true;
@@ -58,6 +75,7 @@ public class Master implements Watcher {
             }
             if (checkMaster()) break;
         }
+       //zk.create("/master", serverId.getBytes(),  ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL, this.mastercreateCallback,null);
     }
 
     public void process(WatchedEvent watchedEvent) {

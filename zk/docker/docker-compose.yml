@@ -1,6 +1,6 @@
 version: '2'
 services:
-  redis-cluster:
+  zk:
     image: digitalwonderland/zookeeper
     ports:
       - '2181:2181'

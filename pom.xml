@@ -21,6 +21,7 @@
         <module>mongodb</module>
         <module>netty</module>
         <module>es</module>
+        <module>ehcache</module>
     </modules>
 
     <dependencyManagement>
@@ -30,6 +31,22 @@
                 <artifactId>zookeeper</artifactId>
                 <version>3.4.10</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>3.4.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

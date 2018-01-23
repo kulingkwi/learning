@@ -28,6 +28,8 @@
         <module>netty</module>
         <module>es</module>
         <module>ehcache</module>
+        <module>mongodb</module>
+        <module>kafka</module>
     </modules>
 
     <dependencyManagement>

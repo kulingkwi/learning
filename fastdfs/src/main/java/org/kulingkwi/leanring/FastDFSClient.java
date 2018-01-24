@@ -1,22 +1,21 @@
 package org.kulingkwi.leanring;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
-import sun.nio.ch.IOUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class FastDFSClient {
 
-    public static final String CONFIG_FILENAME = "~/projects/idea/learning/fastdfs/src/main/resources/fdfs_client.conf.sample";
+    public static final String CONFIG_FILENAME = "/home/gome/projects/idea/learning/fastdfs/src/main/resources/fdfs_client.conf.sample";
 
     private static StorageClient1 storageClient;
 
@@ -39,25 +38,25 @@ public class FastDFSClient {
         }
     }
 
-    public static String uploadFile(File file, String fileName) {
-        return uploadFile(file,fileName,null);
+    public static String uploadFile(File file) {
+        return uploadFile(file, null);
     }
 
-    public static String uploadFile(File file, String fileName, Map<String,String> metaList) {
+    public static String uploadFile(File file, Map<String, String> metaList) {
         try {
             byte[] buff = IOUtils.toByteArray(new FileInputStream(file));
             NameValuePair[] nameValuePairs = null;
             if (metaList != null) {
                 nameValuePairs = new NameValuePair[metaList.size()];
                 int index = 0;
-                for (Iterator<Map.Entry<String,String>> iterator = metaList.entrySet().iterator(); iterator.hasNext();) {
-                    Map.Entry<String,String> entry = iterator.next();
+                for (Iterator<Map.Entry<String, String>> iterator = metaList.entrySet().iterator(); iterator.hasNext(); ) {
+                    Map.Entry<String, String> entry = iterator.next();
                     String name = entry.getKey();
                     String value = entry.getValue();
-                    nameValuePairs[index++] = new NameValuePair(name,value);
+                    nameValuePairs[index++] = new NameValuePair(name, value);
                 }
             }
-            return storageClient.upload_file1(buff, FilenameUtils.getExtension(fileName),nameValuePairs);
+            return storageClient.upload_file1(buff, FilenameUtils.getExtension(file.getName()), nameValuePairs);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,7 +68,7 @@ public class FastDFSClient {
         try {
             byte[] content = storageClient.download_file1(fileId);
             fos = new FileOutputStream(outFile);
-            IOUtils.copy(new ByteArrayInputStream(content),fos);
+            IOUtils.copy(new ByteArrayInputStream(content), fos);
             return 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,6 +91,17 @@ public class FastDFSClient {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public static void main(String[] args) {
+        File testfile = new File("/home/gome/projects/idea/learning/fastdfs/src/main/resources/test.txt");
+        Map<String, String> metaInfo = new HashMap<>();
+        metaInfo.put("meta1", "meta1-1");
+        metaInfo.put("meta2", "meta2-2");
+        String fileId = FastDFSClient.uploadFile(testfile, metaInfo);
+        System.out.println(fileId);
+        FastDFSClient.deleteFile(fileId);
+
     }
 
 }

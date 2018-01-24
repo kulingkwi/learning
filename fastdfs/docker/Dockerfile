@@ -9,6 +9,7 @@ RUN cd ~/fastdfs && wget https://github.com/happyfish100/fastdfs/archive/V5.05.t
 
 WORKDIR /data/fastdfs
 ADD start-fdfs.sh /data/fastdfs/
+RUN chmod a+x /data/fastdfs/start-fdfs.sh
 
-ENTRYPOINT ["/bin/bash", "/data/fastdfs/start-fdfs.sh"]
+ENTRYPOINT ["/data/fastdfs/start-fdfs.sh"]
 

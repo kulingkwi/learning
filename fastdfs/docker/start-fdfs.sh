@@ -20,3 +20,6 @@ mv $storage_conf_tmp $storage_conf
 
 # print monitor information
 /usr/bin/fdfs_monitor $storage_conf
+
+# keep docker running
+tail -f /dev/null

@@ -19,17 +19,15 @@
         <module>redis</module>
         <module>rabbitmq</module>
         <module>rocketmq</module>
-        <module>kafaka</module>
+        <module>kafka</module>
         <module>dubbo</module>
         <module>springboot</module>
         <module>springcloud</module>
         <module>hbase</module>
-        <module>mongodb</module>
         <module>netty</module>
         <module>es</module>
         <module>ehcache</module>
         <module>mongodb</module>
-        <module>kafka</module>
         <module>fastdfs</module>
     </modules>
 

@@ -26,9 +26,9 @@
         <module>hbase</module>
         <module>netty</module>
         <module>es</module>
-        <module>ehcache</module>
         <module>mongodb</module>
         <module>fastdfs</module>
+        <module>ehcache</module>
     </modules>
 
     <dependencyManagement>
@@ -79,6 +79,19 @@
                 <artifactId>commons-io</artifactId>
                 <version>2.6</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>3.5.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.44</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

@@ -1,8 +1,17 @@
 version: '2'
 services:
+<<<<<<< HEAD
   rabbitmq:
     image: rabbitmq
     ports:
       - '5672:5672'
       - '25672:25672'
       - '15672:15672'
+=======
+  zk:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+      - '25672:25672'
+>>>>>>> c1051f069d22cd49ab55dad510328de2cf62a408

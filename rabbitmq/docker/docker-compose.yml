@@ -1,0 +1,8 @@
+version: '2'
+services:
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'

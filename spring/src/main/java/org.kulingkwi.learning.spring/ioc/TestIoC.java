@@ -6,10 +6,13 @@ import org.springframework.core.io.ClassPathResource;
 
 public class TestIoC {
     public static void main(String[] args) {
-        ClassPathResource resource = new ClassPathResource("spring-test.xml");
+        ClassPathResource resource = new ClassPathResource("spring-ioc-test.xml");
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         reader.loadBeanDefinitions(resource);
+
+        TestBean bean = (TestBean) factory.getBean("test");
+        System.out.println(bean.getName());
 
     }
 }

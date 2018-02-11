@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="test" class="org.kulingkwi.learning.spring.ioc.TestBean">
+        <property name="id" value="test id"/>
+        <property name="name" value="test name" />
+    </bean>
+
+    <bean name="testBeforeAdvice" class="org.kulingkwi.learning.spring.aop.TestBeforeInterceptor" />
+    <bean name="testAroundAdvice" class="org.kulingkwi.learning.spring.aop.TestInterceptor" />
+
+    <bean name="testBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target">
+            <bean class="org.kulingkwi.learning.spring.aop.TestImpl">
+                <property name="name"  value="test"/>
+            </bean>
+        </property>
+        <property name="interfaces">
+            <value>org.kulingkwi.learning.spring.aop.TestInterface</value>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>testBeforeAdvice</value>
+                <value>testAroundAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
